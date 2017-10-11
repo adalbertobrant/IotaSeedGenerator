@@ -5,7 +5,7 @@
 
 int main(void){
 
-    char nome_do_arquivo[255],biblioteca[28]={"ABCDEFGHIJKLMNOPQRSTUVXYWZ9"},seed[81];
+    char nome_do_arquivo[255],biblioteca[]={"ABCDEFGHIJKLMNOPQRSTUVXYWZ9"},*seed;
     int i,tamanho;
 
     srand(time(NULL));
@@ -16,12 +16,12 @@ int main(void){
     if (tamanho<30||tamanho>81)printf("Digite um numero entre 30 e 81\n");}
     while(tamanho<30||tamanho>81);
 
-    gets(stdin);/* tira o \n do buffer */
+    fgets(stdin,255,stdin);/* tira o \n do buffer */
 
 
     FILE *arq;
     printf("\n\n\nDigite o nome do Arquivo a ser criado\n\n");
-    gets(nome_do_arquivo);
+    fgets(nome_do_arquivo,255,stdin);
 
     arq=fopen(nome_do_arquivo,"w+a+");
 
@@ -29,7 +29,7 @@ int main(void){
         printf("ERRO na ABERTURA\n");
         fclose(arq);
     }
-
+    seed=malloc( tamanho * sizeof(int));
     printf("Gerando SEED\n\n\n");
     for(i=0;i<tamanho;i++){
         seed[i] = biblioteca[rand()%27];
