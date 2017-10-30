@@ -1,0 +1,71 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<time.h>
+#include<string.h>
+
+int main(void){
+
+    char nome_do_arquivo[255],biblioteca[]={"ABCDEFGHIJKLMNOPQRSTUVXYWZ9"},*seed,c,*tamanho,*escolha;
+    int i,tamanho_inteiro;
+    FILE *arq;
+    tamanho=malloc(255*sizeof(char));
+
+    srand(time(NULL));
+
+    cout<<"ATENCAO A SEED SERA GERADA SEGUINDO ESSAS LETRAS E O NUMERO 9 \n\n"<<biblioteca<<"\n===========================================\n";
+    cout<<"\nDIGITE O TAMANHO DA SEED A SER GERADA\n\nATENCAO O TAMANHO DEVE SER ENTRE 30 A 81\n\n ";
+
+
+    do{fgets(tamanho,255,stdin);
+    tamanho_inteiro = atoi(tamanho);
+    if (tamanho_inteiro<30||tamanho_inteiro>81)
+        VOLTA:cout<<"Digite um numero entre 30 e 81\n";}
+    while(tamanho_inteiro<30||tamanho_inteiro>81);
+
+    cout<<"\nO valor digitado foi "<<tamanho_inteiro<<"\n\n";
+
+    cout<<"Aperte ENTER para confirmar a escolha\n\n";
+
+    while ((c = getchar()) != '\n' && c != EOF) {} /*consume \n*/
+
+
+
+
+
+
+
+    cout<<"\n\n\nDigite o nome do Arquivo a ser criado\n\n";
+
+    fgets(nome_do_arquivo,255,stdin);
+
+    nome_do_arquivo[strlen(nome_do_arquivo)-1]='\0';
+
+    cout<<"\n Nome do arquivo eh = ";
+    cin>>nome_do_arquivo;
+
+    arq=fopen(nome_do_arquivo,"w+a+");
+
+    if(arq==NULL){
+        cout<<"ERRO na ABERTURA\n";
+        fclose(arq);
+    }
+    seed=malloc( tamanho_inteiro * sizeof(int));
+    cout<<"Gerando SEED\n\n\n";
+    for(i=0;i<tamanho_inteiro;i++){
+        seed[i] = biblioteca[rand()%27];
+        }
+        cout<<"\nSEED = "<<strlen(seed)<<"\n";
+
+
+    cout<<"Seed Gerada com Sucesso\n\n "<<seed<<"\n";
+
+    cout<<arq<<"SEED CARTEIRA IOTA \n\n\n    <<seed;
+
+    fclose(arq);
+    free(seed);
+    free(tamanho);
+
+
+    return 0;
+
+    }
