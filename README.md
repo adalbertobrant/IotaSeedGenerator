@@ -16,3 +16,5 @@ Input variables (User defined):
 Output values:
   - key: Generated random seed for iota.
     - constraints: key_size characters from the token_library, randomly chosen.
+    - create a text file with the random seed for iota.
+    
