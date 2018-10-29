@@ -4,8 +4,12 @@ import java.util.stream.IntStream;
 public class IotaSeedGenerator {
 
     private String tokenLibrary = "ABCDEFGHIJKLMNOPQRSTUVXYWZ9";
+    private Random random;
+    private StringBuilder token;
 
-    public IotaSeedGenerator() {
+    IotaSeedGenerator() {
+        this.random = new Random();
+        this.token = new StringBuilder();
     }
 
     public String generateToken(Integer keySize) {
@@ -14,14 +18,12 @@ public class IotaSeedGenerator {
 
     private String createSeed(Integer keySize) {
         Integer libraryLength = this.tokenLibrary.length();
-        Random rand = new Random();
-        StringBuilder token = new StringBuilder();
 
         IntStream.range(0, keySize).forEach(character -> {
-            int randomIndex = rand.nextInt(libraryLength);
+            int randomIndex = random.nextInt(libraryLength);
             token.append(this.tokenLibrary.charAt(randomIndex));
         });
+
         return token.toString();
     }
-
 }
