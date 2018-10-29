@@ -1,3 +1,5 @@
+import java.util.Random;
+import java.util.stream.IntStream;
 
 public class IotaSeedGenerator {
 
@@ -11,10 +13,15 @@ public class IotaSeedGenerator {
     }
 
     private String createSeed(Integer keySize) {
-        return "";
+        Integer libraryLength = this.tokenLibrary.length();
+        Random rand = new Random();
+        StringBuilder token = new StringBuilder();
+
+        IntStream.range(0, keySize).forEach(character -> {
+            int randomIndex = rand.nextInt(libraryLength);
+            token.append(this.tokenLibrary.charAt(randomIndex));
+        });
+        return token.toString();
     }
 
 }
-
-
-
