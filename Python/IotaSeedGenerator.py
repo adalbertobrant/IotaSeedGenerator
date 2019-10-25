@@ -17,8 +17,16 @@ class IotaSeedGenerator(object):
 
 
 if __name__ == '__main__':
-    key_size = int(argv[1]) if len(argv) > 1 else 0
+    if len(argv) == 1:
+        print('Please enter key_size')
+        exit(1)
+    try:
+        key_size = int(argv[1])
+    except ValueError:
+        print('key_size is not number')
+        exit(1)
     if key_size < 31 or key_size > 81:
         print("key_size must be grater than 30, lower than 82")
         exit(1)
+
     print(IotaSeedGenerator.creata_seed(key_size))
